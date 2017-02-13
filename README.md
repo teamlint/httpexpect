@@ -1,4 +1,4 @@
-# httpexpect [![GoDoc](https://godoc.org/github.com/gavv/httpexpect?status.svg)](https://godoc.org/github.com/gavv/httpexpect) [![Gitter](https://badges.gitter.im/gavv/httpexpect.svg)](https://gitter.im/gavv/httpexpect?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Travis](https://img.shields.io/travis/gavv/httpexpect.svg)](https://travis-ci.org/gavv/httpexpect) [![Coveralls](https://coveralls.io/repos/github/gavv/httpexpect/badge.svg?branch=master)](https://coveralls.io/github/gavv/httpexpect?branch=master)
+# httpexpect [![GoDoc](https://godoc.org/github.com/iris-contrib/httpexpect?status.svg)](https://godoc.org/github.com/iris-contrib/httpexpect) [![Gitter](https://badges.gitter.im/gavv/httpexpect.svg)](https://gitter.im/gavv/httpexpect?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Travis](https://img.shields.io/travis/gavv/httpexpect.svg)](https://travis-ci.org/gavv/httpexpect) [![Coveralls](https://coveralls.io/repos/github/gavv/httpexpect/badge.svg?branch=master)](https://coveralls.io/github/gavv/httpexpect?branch=master)
 
 Concise, declarative, and easy to use end-to-end HTTP and REST API testing for Go (golang).
 
@@ -41,7 +41,7 @@ Workflow:
 
 ##### Tuning
 
-* Tests can communicate with server via real HTTP client or invoke `net/http` or [`fasthttp`](https://github.com/valyala/fasthttp/) handler directly.
+* Tests can communicate with server via real HTTP client or invoke `net/http` handler directly.
 * Custom HTTP client, logger, printer, and failure reporter may be provided by user.
 * Custom HTTP request factory may be provided, e.g. from the Google App Engine testing.
 
@@ -58,36 +58,21 @@ import "gopkg.in/gavv/httpexpect.v1"
 Development is done in `master` branch on github:
 
 ```go
-import "github.com/gavv/httpexpect"
+import "github.com/iris-contrib/httpexpect"
 ```
 
 ## Documentation
 
-Documentation is available on [GoDoc](https://godoc.org/github.com/gavv/httpexpect). It contains an overview and reference.
+Documentation is available on [GoDoc](https://godoc.org/github.com/iris-contrib/httpexpect). It contains an overview and reference.
 
 ## Examples
 
 See [`_examples`](_examples) directory for complete standalone examples.
 
-* [`fruits_test.go`](_examples/fruits_test.go)
-
-    Testing a simple CRUD server made with bare `net/http`.
 
 * [`iris_test.go`](_examples/iris_test.go)
 
     Testing a server made with [`iris`](https://github.com/kataras/iris/) framework. Example includes JSON queries and validation, URL and form parameters, basic auth, sessions, and streaming. Tests invoke the `http.Handler` directly.
-
-* [`echo_test.go`](_examples/echo_test.go)
-
-    Testing a server with JWT authentication made with [`echo`](https://github.com/labstack/echo/) framework. Tests use either HTTP client or invoke the `http.Handler` directly.
-
-* [`fasthttp_test.go`](_examples/fasthttp_test.go)
-
-    Testing a server made with [`fasthttp`](https://github.com/valyala/fasthttp) package. Tests invoke the `fasthttp.RequestHandler` directly.
-
-* [`gae_test.go`](_examples/gae_test.go)
-
-    Testing a server running under the [Google App Engine](https://en.wikipedia.org/wiki/Google_App_Engine).
 
 ## Quick start
 
@@ -101,7 +86,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gavv/httpexpect"
+	"github.com/iris-contrib/httpexpect"
 )
 
 func TestFruits(t *testing.T) {
@@ -387,16 +372,6 @@ e := httpexpect.WithConfig(httpexpect.Config{
 	},
 })
 
-// invoke fasthttp.RequestHandler directly using httpexpect.FastBinder
-var handler fasthttp.RequestHandler = myHandler()
-
-e := httpexpect.WithConfig(httpexpect.Config{
-	Reporter: httpexpect.NewAssertReporter(t),
-	Client: &http.Client{
-		Transport: httpexpect.NewFastBinder(handler),
-		Jar:       httpexpect.NewJar(),
-	},
-})
 ```
 
 ## Similar packages

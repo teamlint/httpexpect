@@ -6,13 +6,16 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/iris-contrib/middleware/basicauth"
-	"github.com/kataras/iris"
+	"gopkg.in/kataras/iris.v6"
+	"gopkg.in/kataras/iris.v6/adaptors/httprouter"
+	"gopkg.in/kataras/iris.v6/middleware/basicauth"
 )
 
-// IrisHandler creates fasthttp.RequestHandler using Iris (v6+) web framework.
+// IrisHandler tests iris v6's handler
 func IrisHandler() http.Handler {
 	api := iris.New()
+	
+	api.Adapt(httprouter.New())
 
 	api.Get("/things", func(c *iris.Context) {
 		c.JSON(iris.StatusOK, []interface{}{
@@ -98,6 +101,6 @@ func IrisHandler() http.Handler {
 		c.Writef(c.Session().GetString("message"))
 	})
 
-	api.Build()
+	api.Boot()
 	return api.Router
 }
