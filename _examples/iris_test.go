@@ -82,7 +82,8 @@ func TestIrisParams(t *testing.T) {
 	// Form: p1=P1&p2=P2
 
 	r := e.POST("/params/{x}/{y}", "xxx", "yyy").
-		WithQuery("q", "qqq").WithForm(Form{P1: "P1", P2: "P2"}).
+		WithQuery("q", "qqq").
+		WithForm(Form{P1: "P1", P2: "P2"}).
 		Expect().
 		Status(http.StatusOK).JSON().Object()
 
