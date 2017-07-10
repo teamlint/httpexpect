@@ -3,8 +3,8 @@
 // Usage examples
 //
 // See example directory:
-//  - https://godoc.org/github.com/iris-contrib/httpexpect/_examples
-//  - https://github.com/iris-contrib/httpexpect/tree/master/_examples
+//  - https://godoc.org/github.com/ion-contrib/httpexpect/_examples
+//  - https://github.com/ion-contrib/httpexpect/tree/master/_examples
 //
 // Communication mode
 //
